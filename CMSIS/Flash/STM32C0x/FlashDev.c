@@ -92,10 +92,10 @@ struct FlashDevice const FlashDevice  =  {
 #ifdef STM32C0x_64
 struct FlashDevice const FlashDevice  =  {
    FLASH_DRV_VERS,             // Driver Version, do not modify!
-   "STM32C0x_64",            // Device Name (32kB)
+   "STM32C0x_64",            // Device Name (64kB)
    ONCHIP,                     // Device Type
    0x08000000,                 // Device Start Address
-   0x00010000,                 // Device Size in Bytes (128kB)
+   0x00010000,                 // Device Size in Bytes (64kB)
    2048,                       // Programming Page Size
    0,                          // Reserved, must be 0
    0xFF,                       // Initial Content of Erased Memory
@@ -107,5 +107,26 @@ struct FlashDevice const FlashDevice  =  {
    SECTOR_END
 };
 #endif
+
+
+#ifdef STM32C0x_256
+struct FlashDevice const FlashDevice  =  {
+   FLASH_DRV_VERS,             // Driver Version, do not modify!
+   "STM32C0x_256",            // Device Name (256kB)
+   ONCHIP,                     // Device Type
+   0x08000000,                 // Device Start Address
+   0x00040000,                 // Device Size in Bytes (64kB)
+   2048,                       // Programming Page Size
+   0,                          // Reserved, must be 0
+   0xFF,                       // Initial Content of Erased Memory
+   400,                        // Program Page Timeout 400 mSec
+   400,                        // Erase Sector Timeout 400 mSec
+
+// Specify Size and Address of Sectors
+   0x800, 0x000000,            // Sector Size  2kB (32 Sectors)
+   SECTOR_END
+};
+#endif
+
 
 #endif // FLASH_MEM

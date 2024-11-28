@@ -13,30 +13,17 @@
   </licenseSets>
 
   <releases>
-    <release version="2.0.0-dev">
-      Updated for new CMSIS-Toolbox CubeMX integration
-      Removed CMSIS VIO Driver
-      Removed STM32CubeMX_FW_C0
-      Removed board drivers (Basic I/O, ...)
-      Removed all examples
-      Updated SVD files
-      Removed previous generator (gpdsc)
-      Added new global generator
+    <release version="2.1.0-dev">
+      Active development ...
+
       Package Description (pdsc):
-      - Removed Device:Startup component
-      - Removed Device:STM32Cube HAL components
-      - Removed Device:STM32Cube LL components
-      - Removed Board descriptions
-      - Removed BSP components
-      - Removed compile device header from device description
-      - Removed unused conditions
-      - Replaced documentation files with permalinks
-      - Added LICENSE file
-      - Added STM32C071 subfamily
+       - Added STM32C051/91/92 subfamilies
       Device support:
-      - Added Flashloader for 128K and 64K devices
-      - Added SVD file for STM32C07xx devices
+      - Added Flashloader for 256K devices
+      - Updated SVD fiels for STM32C011/31 devices
+      - Added SVD files for STM32C051/91/92 devices
     </release>
+
     <release version="1.0.0" date="2023-01-12">
       Initial version of STM32C0 Device Family Pack for use with:
       - STM32CubeMX 6.7.0
@@ -60,9 +47,9 @@
       <book name="https://developer.arm.com/documentation/dui0662/latest" title="Cortex-M0+ Generic User Guide"/>
 
       <description>
-The STM32C0xxxx mainstream microcontrollers are based on high-performance Arm® Cortex®-M0+ 32-bit RISC core operating at up to 48 MHz frequency.
-Offering a high level of integration, they are suitable for a wide range of applications in consumer, industrial and appliance domains and ready for the Internet of Things (IoT) solutions.
-The devices incorporate a memory protection unit (MPU), high-speed embedded memories, DMA, an extensive range of system functions, enhanced I/Os, and peripherals.
+      The STM32C0xxxx mainstream microcontrollers are based on high-performance Arm® Cortex®-M0+ 32-bit RISC core operating at up to 48 MHz frequency.
+      Offering a high level of integration, they are suitable for a wide range of applications in consumer, industrial and appliance domains and ready for the Internet of Things (IoT) solutions.
+      The devices incorporate a memory protection unit (MPU), high-speed embedded memories, DMA, an extensive range of system functions, enhanced I/Os, and peripherals.
       </description>
 
       <sequences>
@@ -135,31 +122,39 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C011F6Ux'  ***************************** -->
         <device Dname="STM32C011F6Ux">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00001800" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00001800" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
           <feature type="QFP" n="20"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C011F6UxTR'  ***************************** -->
+        <device Dname="STM32C011F6UxTR">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00001800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
+          <feature type="QFP" n="20"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C011D6YxTR'  ***************************** -->
+        <device Dname="STM32C011D6YxTR">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00001800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
+          <feature type="CSP" n="12"/>
         </device>
 
         <!-- *************************  Device 'STM32C011F6Px'  ***************************** -->
         <device Dname="STM32C011F6Px">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00001800" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00001800" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
           <feature type="SOP" n="20"/>
-        </device>
-
-        <!-- *************************  Device 'STM32C011D6Yx'  ***************************** -->
-        <device Dname="STM32C011D6Yx">
-          <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00001800" default="1" init="0" />
-          <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
-          <feature type="CSP" n="12"/>
         </device>
 
         <!-- *************************  Device 'STM32C011J6Mx'  ***************************** -->
         <device Dname="STM32C011J6Mx">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00001800" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00001800" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
           <!--feature type="SON" n="8"/-->
           <feature type="PackageOther" n="8" name="SON"/>
@@ -169,7 +164,15 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C011F4Ux'  ***************************** -->
         <device Dname="STM32C011F4Ux">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00004000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00001800" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00001800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_16.FLM"  start="0x08000000" size="0x00004000" default="1" />
+          <feature type="QFP" n="20"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C011F4UxTR'  ***************************** -->
+        <device Dname="STM32C011F4UxTR">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00004000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00001800" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_16.FLM"  start="0x08000000" size="0x00004000" default="1" />
           <feature type="QFP" n="20"/>
         </device>
@@ -177,7 +180,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C011F4Px'  ***************************** -->
         <device Dname="STM32C011F4Px">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00004000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00001800" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00001800" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_16.FLM"  start="0x08000000" size="0x00004000" default="1" />
           <feature type="SOP" n="20"/>
         </device>
@@ -185,7 +188,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C011J4Mx'  ***************************** -->
         <device Dname="STM32C011J4Mx">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00004000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00001800" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00001800" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_16.FLM"  start="0x08000000" size="0x00004000" default="1" />
           <!--feature type="SON" n="8"/-->
           <feature type="PackageOther" n="8" name="SON"/>
@@ -211,7 +214,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C031C6Tx'  ***************************** -->
         <device Dname="STM32C031C6Tx">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
           <feature type="QFP" n="48"/>
         </device>
@@ -219,7 +222,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C031C6Ux'  ***************************** -->
         <device Dname="STM32C031C6Ux">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
           <feature type="QFP" n="48"/>
         </device>
@@ -227,7 +230,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C031K6Tx'  ***************************** -->
         <device Dname="STM32C031K6Tx">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
           <feature type="QFP" n="32"/>
         </device>
@@ -235,7 +238,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C031K6Ux'  ***************************** -->
         <device Dname="STM32C031K6Ux">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
           <feature type="QFP" n="32"/>
         </device>
@@ -243,7 +246,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C031G6Ux'  ***************************** -->
         <device Dname="STM32C031G6Ux">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
           <feature type="QFP" n="28"/>
         </device>
@@ -251,7 +254,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C031F6Px'  ***************************** -->
         <device Dname="STM32C031F6Px">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
           <feature type="SOP" n="20"/>
         </device>
@@ -260,7 +263,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C031C4Ux'  ***************************** -->
         <device Dname="STM32C031C4Ux">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00004000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_16.FLM"  start="0x08000000" size="0x00004000" default="1" />
           <feature type="QFP" n="48"/>
         </device>
@@ -268,7 +271,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C031C4Tx'  ***************************** -->
         <device Dname="STM32C031C4Tx">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00004000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_16.FLM"  start="0x08000000" size="0x00004000" default="1" />
           <feature type="QFP" n="48"/>
         </device>
@@ -276,7 +279,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C031K4Tx'  ***************************** -->
         <device Dname="STM32C031K4Tx">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00004000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_16.FLM"  start="0x08000000" size="0x00004000" default="1" />
           <feature type="QFP" n="32"/>
         </device>
@@ -284,7 +287,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C031K4Ux'  ***************************** -->
         <device Dname="STM32C031K4Ux">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00004000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_16.FLM"  start="0x08000000" size="0x00004000" default="1" />
           <feature type="QFP" n="32"/>
         </device>
@@ -292,7 +295,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C031G4Ux'  ***************************** -->
         <device Dname="STM32C031G4Ux">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00004000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_16.FLM"  start="0x08000000" size="0x00004000" default="1" />
           <feature type="QFP" n="28"/>
         </device>
@@ -300,8 +303,122 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C031F4Px'  ***************************** -->
         <device Dname="STM32C031F4Px">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00004000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_16.FLM"  start="0x08000000" size="0x00004000" default="1" />
+          <feature type="SOP" n="20"/>
+        </device>
+      </subFamily>
+
+      <!-- ************************  Subfamily 'STM32C051'  **************************** -->
+      <subFamily DsubFamily="STM32C051">
+        <debug svd="CMSIS/SVD/STM32C051.svd"/>
+        <compile define="STM32C051xx"/>
+
+        <book name="https://www.st.com/resource/en/reference_manual/rm0490-stm32c0x1-advanced-armbased-32bit-mcus-stmicroelectronics.pdf"  title="STM32C0x1 Reference Manual"/>
+        <!-- <book name="..." title="STM32C051 Datasheet"/> -->
+
+        <debugvars configfile="CMSIS/Debug/STM32C0x1.dbgconf" version="1.0.0">
+          // Debug Access Variables, can be modified by user via copies of DBGCONF files as created by uVision. Also see sub-family level.
+          __var DbgMCU_CR        = 0x00000006;   // DBGMCU_CR:       DBGMCU configuration register
+          __var DbgMCU_APB_Fz1   = 0x00000000;   // DBGMCU_APB_FZ1:  DBGMCU APB freeze register 1
+          __var DbgMCU_APB_Fz2   = 0x00000000;   // DBGMCU_APB_FZ2:  DBGMCU APB freeze register 2
+        </debugvars>
+
+        <!-- ################################### 64 KB ################################## -->
+        <!-- *************************  Device 'STM32C051C8Tx'  ***************************** -->
+        <device Dname="STM32C051C8Tx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C051C8Ux'  ***************************** -->
+        <device Dname="STM32C051C8Ux">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
+          <feature type="QFN" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C051K8Tx'  ***************************** -->
+        <device Dname="STM32C051K8Tx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
+          <feature type="QFP" n="32"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C051G8Ux'  ***************************** -->
+        <device Dname="STM32C051G8Ux">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
+          <feature type="QFN" n="28"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C051F8Px'  ***************************** -->
+        <device Dname="STM32C051F8Px">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
+          <feature type="SOP" n="20"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C051D8YxTR'  ***************************** -->
+        <device Dname="STM32C051D8YxTR">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
+          <feature type="CSP" n="14"/>
+        </device>
+
+        <!-- ################################### 32 KB ################################## -->
+        <!-- *************************  Device 'STM32C051C6Tx'  ***************************** -->
+        <device Dname="STM32C051C6Tx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C051C6Ux'  ***************************** -->
+        <device Dname="STM32C051C6Ux">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
+          <feature type="QFN" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C051K6Tx'  ***************************** -->
+        <device Dname="STM32C051K6Tx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
+          <feature type="QFP" n="32"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C051K6Ux'  ***************************** -->
+        <device Dname="STM32C051K6Ux">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
+          <feature type="QFN" n="32"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C051G6Ux'  ***************************** -->
+        <device Dname="STM32C051G6Ux">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
+          <feature type="QFN" n="28"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C051F6Px'  ***************************** -->
+        <device Dname="STM32C051F6Px">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00008000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00003000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_32.FLM"  start="0x08000000" size="0x00008000" default="1" />
           <feature type="SOP" n="20"/>
         </device>
       </subFamily>
@@ -325,7 +442,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071RBTx'  ***************************** -->
         <device Dname="STM32C071RBTx">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
           <feature type="QFP" n="64"/>
         </device>
@@ -333,7 +450,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071CBTx'  ***************************** -->
         <device Dname="STM32C071CBTx">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
           <feature type="QFP" n="48"/>
         </device>
@@ -341,7 +458,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071CBUx'  ***************************** -->
         <device Dname="STM32C071CBUx">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
           <feature type="QFN" n="48"/>
         </device>
@@ -349,7 +466,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071KBTx'  ***************************** -->
         <device Dname="STM32C071KBTx">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
           <feature type="QFP" n="32"/>
         </device>
@@ -357,7 +474,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071KBUx'  ***************************** -->
         <device Dname="STM32C071KBUx">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
           <feature type="QFN" n="32"/>
         </device>
@@ -365,23 +482,15 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071GBUx'  ***************************** -->
         <device Dname="STM32C071GBUx">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
           <feature type="QFN" n="28"/>
         </device>
 
-        <!-- *************************  Device 'STM32C071FBPx'  ***************************** -->
-        <device Dname="STM32C071FBPx">
+        <!-- *************************  Device 'STM32C071FBYxTR'  ***************************** -->
+        <device Dname="STM32C071FBYxTR">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
-          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
-          <feature type="SOP" n="20"/>
-        </device>
-
-        <!-- *************************  Device 'STM32C071FBYx'  ***************************** -->
-        <device Dname="STM32C071FBYx">
-          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
           <feature type="CSP" n="19"/>
         </device>
@@ -389,7 +498,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071RBTxN'  ***************************** -->
         <device Dname="STM32C071RBTxN">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
           <feature type="QFP" n="64"/>
         </device>
@@ -397,7 +506,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071RBIxN'  ***************************** -->
         <device Dname="STM32C071RBIxN">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
           <feature type="BGA" n="64"/>
         </device>
@@ -405,7 +514,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071CBTxN'  ***************************** -->
         <device Dname="STM32C071CBTxN">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
           <feature type="QFP" n="48"/>
         </device>
@@ -413,7 +522,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071CBUxN'  ***************************** -->
         <device Dname="STM32C071CBUxN">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
           <feature type="QFN" n="48"/>
         </device>
@@ -421,7 +530,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071KBTxN'  ***************************** -->
         <device Dname="STM32C071KBTxN">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
           <feature type="QFP" n="32"/>
         </device>
@@ -429,7 +538,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071KBUxN'  ***************************** -->
         <device Dname="STM32C071KBUxN">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
           <feature type="QFN" n="32"/>
         </device>
@@ -437,24 +546,16 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071GBUxN'  ***************************** -->
         <device Dname="STM32C071GBUxN">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
           <feature type="QFN" n="28"/>
-        </device>
-
-        <!-- *************************  Device 'STM32C071FBPxN'  ***************************** -->
-        <device Dname="STM32C071FBPxN">
-          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
-          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
-          <feature type="SOP" n="20"/>
         </device>
 
         <!-- ################################### 64 KB ################################## -->
         <!-- *************************  Device 'STM32C071R8Tx'  ***************************** -->
         <device Dname="STM32C071R8Tx">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
           <feature type="QFP" n="64"/>
         </device>
@@ -462,7 +563,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071C8Tx'  ***************************** -->
         <device Dname="STM32C071C8Tx">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
           <feature type="QFP" n="48"/>
         </device>
@@ -470,7 +571,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071C8Ux'  ***************************** -->
         <device Dname="STM32C071C8Ux">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
           <feature type="QFN" n="48"/>
         </device>
@@ -478,7 +579,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071K8Tx'  ***************************** -->
         <device Dname="STM32C071K8Tx">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
           <feature type="QFP" n="32"/>
         </device>
@@ -486,7 +587,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071K8Ux'  ***************************** -->
         <device Dname="STM32C071K8Ux">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
           <feature type="QFN" n="32"/>
         </device>
@@ -494,7 +595,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071G8Ux'  ***************************** -->
         <device Dname="STM32C071G8Ux">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
           <feature type="QFN" n="28"/>
         </device>
@@ -502,7 +603,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071F8Px'  ***************************** -->
         <device Dname="STM32C071F8Px">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
           <feature type="SOP" n="20"/>
         </device>
@@ -510,7 +611,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071R8TxN'  ***************************** -->
         <device Dname="STM32C071R8TxN">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
           <feature type="QFP" n="64"/>
         </device>
@@ -518,7 +619,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071C8TxN'  ***************************** -->
         <device Dname="STM32C071C8TxN">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
           <feature type="QFP" n="48"/>
         </device>
@@ -526,7 +627,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071C8UxN'  ***************************** -->
         <device Dname="STM32C071C8UxN">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
           <feature type="QFN" n="48"/>
         </device>
@@ -534,7 +635,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071K8TxN'  ***************************** -->
         <device Dname="STM32C071K8TxN">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
           <feature type="QFP" n="32"/>
         </device>
@@ -542,7 +643,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071K8UxN'  ***************************** -->
         <device Dname="STM32C071K8UxN">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
           <feature type="QFN" n="32"/>
         </device>
@@ -550,7 +651,7 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071G8UxN'  ***************************** -->
         <device Dname="STM32C071G8UxN">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
           <feature type="QFN" n="28"/>
         </device>
@@ -558,13 +659,306 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
         <!-- *************************  Device 'STM32C071F8PxN'  ***************************** -->
         <device Dname="STM32C071F8PxN">
           <memory name="Flash" access="rx"               start="0x08000000" size="0x00010000" default="1" startup="1" />
-          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" init="0" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_64.FLM"  start="0x08000000" size="0x00010000" default="1" />
           <feature type="SOP" n="20"/>
         </device>
       </subFamily>
 
+      <!-- ************************  Subfamily 'STM32C091'  **************************** -->
+      <subFamily DsubFamily="STM32C091">
+        <debug svd="CMSIS/SVD/STM32C091.svd"/>
+        <compile define="STM32C091xx"/>
+
+        <book name="https://www.st.com/resource/en/reference_manual/rm0490-stm32c0x1-advanced-armbased-32bit-mcus-stmicroelectronics.pdf"  title="STM32C0x1 Reference Manual"/>
+        <!-- <book name="..." title="STM32C091 Datasheet"/> -->
+
+        <debugvars configfile="CMSIS/Debug/STM32C0x1.dbgconf" version="1.0.0">
+          // Debug Access Variables, can be modified by user via copies of DBGCONF files as created by uVision. Also see sub-family level.
+          __var DbgMCU_CR        = 0x00000006;   // DBGMCU_CR:       DBGMCU configuration register
+          __var DbgMCU_APB_Fz1   = 0x00000000;   // DBGMCU_APB_FZ1:  DBGMCU APB freeze register 1
+          __var DbgMCU_APB_Fz2   = 0x00000000;   // DBGMCU_APB_FZ2:  DBGMCU APB freeze register 2
+        </debugvars>
+
+        <!-- ################################### 256 KB ################################## -->
+        <!-- *************************  Device 'STM32C091RCTx'  ***************************** -->
+        <device Dname="STM32C091RCTx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00009000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C091ECYxTR'  ***************************** -->
+        <device Dname="STM32C091ECYxTR">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00009000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="CSP" n="24"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C091RCIx'  ***************************** -->
+        <device Dname="STM32C091RCIx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00009000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="BGA" n="64"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C091CCTx'  ***************************** -->
+        <device Dname="STM32C091CCTx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00009000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C091CCUx'  ***************************** -->
+        <device Dname="STM32C091CCUx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00009000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="QFN" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C091KCTx'  ***************************** -->
+        <device Dname="STM32C091KCTx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00009000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="QFP" n="32"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C091KCUx'  ***************************** -->
+        <device Dname="STM32C091KCUx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00009000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="QFN" n="32"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C091GCUx'  ***************************** -->
+        <device Dname="STM32C091GCUx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00009000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="QFN" n="28"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C091FCPx'  ***************************** -->
+        <device Dname="STM32C091FCPx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00009000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="SOP" n="20"/>
+        </device>
+
+        <!-- ################################### 128 KB ################################## -->
+        <!-- *************************  Device 'STM32C091RBTx'  ***************************** -->
+        <device Dname="STM32C091RBTx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00009000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C091CBTx'  ***************************** -->
+        <device Dname="STM32C091CBTx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00009000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C091CBUx'  ***************************** -->
+        <device Dname="STM32C091CBUx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00009000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
+          <feature type="QFN" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C091KBTx'  ***************************** -->
+        <device Dname="STM32C091KBTx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00009000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
+          <feature type="QFP" n="32"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C091KBUx'  ***************************** -->
+        <device Dname="STM32C091KBUx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00009000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
+          <feature type="QFN" n="32"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C091GBUx'  ***************************** -->
+        <device Dname="STM32C091GBUx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00009000" default="1" init="0 "/>
+          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
+          <feature type="QFN" n="28"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C091FBPx'  ***************************** -->
+        <device Dname="STM32C091FBPx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1 "/>
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00009000" default="1" init="0 "/>
+          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1 "/>
+          <feature type="SOP" n="20"/>
+        </device>
+      </subFamily>
+
+      <!-- ************************  Subfamily 'STM32C092'  **************************** -->
+      <subFamily DsubFamily="STM32C092">
+        <debug svd="CMSIS/SVD/STM32C092.svd"/>
+        <compile define="STM32C092xx"/>
+
+        <book name="https://www.st.com/resource/en/reference_manual/rm0490-stm32c0x1-advanced-armbased-32bit-mcus-stmicroelectronics.pdf"  title="STM32C0x1 Reference Manual"/>
+        <!-- <book name="..." title="STM32C092 Datasheet"/> -->
+
+        <debugvars configfile="CMSIS/Debug/STM32C0x1.dbgconf" version="1.0.0">
+          // Debug Access Variables, can be modified by user via copies of DBGCONF files as created by uVision. Also see sub-family level.
+          __var DbgMCU_CR        = 0x00000006;   // DBGMCU_CR:       DBGMCU configuration register
+          __var DbgMCU_APB_Fz1   = 0x00000000;   // DBGMCU_APB_FZ1:  DBGMCU APB freeze register 1
+          __var DbgMCU_APB_Fz2   = 0x00000000;   // DBGMCU_APB_FZ2:  DBGMCU APB freeze register 2
+        </debugvars>
+
+        <!-- ################################### 256 KB ################################## -->
+        <!-- *************************  Device 'STM32C092RCTx'  ***************************** -->
+        <device Dname="STM32C092RCTx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00007800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C092ECYxTR'  ***************************** -->
+        <device Dname="STM32C092ECYxTR">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00007800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="CSP" n="24"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C092RCIx'  ***************************** -->
+        <device Dname="STM32C092RCIx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00007800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="BGA" n="64"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C092CCTx'  ***************************** -->
+        <device Dname="STM32C092CCTx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00007800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C092CCUx'  ***************************** -->
+        <device Dname="STM32C092CCUx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00007800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="QFN" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C092KCTx'  ***************************** -->
+        <device Dname="STM32C092KCTx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00007800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="QFP" n="32"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C092KCUx'  ***************************** -->
+        <device Dname="STM32C092KCUx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00007800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="QFN" n="32"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C092GCUx'  ***************************** -->
+        <device Dname="STM32C092GCUx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00007800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="QFN" n="28"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C092FCPx'  ***************************** -->
+        <device Dname="STM32C092FCPx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00007800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_256.FLM" start="0x08000000" size="0x00040000" default="1" />
+          <feature type="SOP" n="20"/>
+        </device>
+
+        <!-- ################################### 128 KB ################################## -->
+        <!-- *************************  Device 'STM32C092RBTx'  ***************************** -->
+        <device Dname="STM32C092RBTx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00007800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C092CBTx'  ***************************** -->
+        <device Dname="STM32C092CBTx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00007800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C092CBUx'  ***************************** -->
+        <device Dname="STM32C092CBUx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00007800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
+          <feature type="QFN" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C092KBTx'  ***************************** -->
+        <device Dname="STM32C092KBTx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00007800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
+          <feature type="QFP" n="32"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C092KBUx'  ***************************** -->
+        <device Dname="STM32C092KBUx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00007800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
+          <feature type="QFN" n="32"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C092GBUx'  ***************************** -->
+        <device Dname="STM32C092GBUx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00007800" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
+          <feature type="QFN" n="28"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C092FBPx'  ***************************** -->
+        <device Dname="STM32C092FBPx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1 "/>
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00007800" default="1" init="0 "/>
+          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1 "/>
+          <feature type="SOP" n="20"/>
+        </device>
+      </subFamily>
+
     </family>
+
   </devices>
 
   <conditions>
@@ -604,5 +998,4 @@ The devices incorporate a memory protection unit (MPU), high-speed embedded memo
     </template>
 
   </csolution>
-
 </package>
