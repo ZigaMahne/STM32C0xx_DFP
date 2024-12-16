@@ -8,7 +8,7 @@
   <license>LICENSE</license>
   <licenseSets>
     <licenseSet id="all" default="true" gating="true">
-      <license name="LICENSE" title="Apache 2.0 open-source license" spdx="Apache-2.0"/>
+      <license title="Apache-2.0 License for CMSIS add-ons" name="LICENSE" spdx="Apache-2.0"/>
     </licenseSet>
   </licenseSets>
 
