@@ -13,17 +13,10 @@
   </licenseSets>
 
   <releases>
-    <release version="2.1.0-dev">
+    <release version="2.1.1-dev">
       Active development ...
 
-      Package Description (pdsc):
-       - Added STM32C051/91/92 subfamilies
-      Device support:
-      - Added Flashloader for 256K devices
-      - Updated SVD fiels for STM32C011/31 devices
-      - Added SVD files for STM32C051/91/92 devices
     </release>
-
     <release version="1.0.0" date="2023-01-12">
       Initial version of STM32C0 Device Family Pack for use with:
       - STM32CubeMX 6.7.0
