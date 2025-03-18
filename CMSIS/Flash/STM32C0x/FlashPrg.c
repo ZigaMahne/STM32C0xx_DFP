@@ -30,14 +30,15 @@
  */
 
 #include "..\FlashOS.h"        // FlashOS Structures
-#include <cmsis_armclang.h>
+#include <stdint.h>
+#include "cmsis_compiler.h"
 
 typedef volatile unsigned long    vu32;
 typedef          unsigned long     u32;
 
 #define M32(adr) (*((vu32 *) (adr)))
 
-
+#define FLASHSIZE_BASE   (0x1FFF75A0)
 // Peripheral Memory Map
 #define FLASH_BASE        0x40022000
 #define IWDG_BASE         0x40003000
@@ -227,11 +228,15 @@ int EraseSector (unsigned long adr) {
   unsigned long page;
 
 __disable_irq();
+	uint32_t gFlashSize;
+
+ gFlashSize = (M32(FLASHSIZE_BASE) & 0x00000FFF);
+uint32_t	FLASH_PNB=(((((gFlashSize*0x400)/0x800)-1))<<3);
   /*Clear the error status*/
     FLASH->SR =FLASH_PGERR;
 
   /*Clear page and block bits*/
-  FLASH->CR &= ~(FLASH_CR_PNB);
+  FLASH->CR &= ~(FLASH_PNB);
 
 
   /*Calculate the page and set
@@ -251,7 +256,9 @@ __disable_irq();
     FLASH->SR  = FLASH_PGERR;                             // Reset Error Flags
     return (1);                                           // Failed
   }
-
+	/*Clear page and block bits*/
+  FLASH->CR &= ~(FLASH_PNB);
+	
 	 FLASH->CR &= (~FLASH_CR_PER);
 	  if ((* (unsigned long *)0x08000000) == 0xFFFFFFFF)          //empty check
   {
