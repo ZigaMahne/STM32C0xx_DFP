@@ -13,11 +13,8 @@
   </licenseSets>
 
   <releases>
-    <release version="2.1.1-dev">
+    <release version="2.2.1-dev">
       Active development ...
-
-      Device support:
-      - Updated Flashloader for 16/32/64/128/256K devices
     </release>
     <release version="1.0.0" date="2023-01-12">
       Initial version of STM32C0 Device Family Pack for use with:
@@ -37,7 +34,7 @@
 
   <devices>
     <family Dfamily="STM32C0 Series" Dvendor="STMicroelectronics:13">
-      <processor Dcore="Cortex-M0+" DcoreVersion="r0p1" Dclock="48000000" Dfpu="NO_FPU" Dmpu="MPU" Dendian="Little-endian"/>
+      <processor Dcore="Cortex-M0+" DcoreVersion="r0p1" Dclock="48000000" Dfpu="NO_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dendian="Little-endian"/>
 
       <book name="https://developer.arm.com/documentation/dui0662/latest" title="Cortex-M0+ Generic User Guide"/>
 
@@ -488,6 +485,21 @@
           <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
           <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
           <feature type="CSP" n="19"/>
+        </device>
+
+        <!-- *************************  Device 'STM32C071FBPx'  ***************************** -->
+        <device Dname="STM32C071FBPx">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
+          <feature type="SOP" n="20"/>
+        </device>
+        <!-- *************************  Device 'STM32C071FBPxN'  ***************************** -->
+        <device Dname="STM32C071FBPxN">
+          <memory name="Flash" access="rx"               start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <memory name="SRAM"  access="rwx"              start="0x20000000" size="0x00006000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32C0x_128.FLM" start="0x08000000" size="0x00020000" default="1" />
+          <feature type="SOP" n="20"/>
         </device>
 
         <!-- *************************  Device 'STM32C071RBTxN'  ***************************** -->
