@@ -18,7 +18,7 @@ Copyright (c) 2024 STMicroelectronics.
 -->
 <device xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.1" xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
   <name>STM32C031</name>
-  <version>1.2</version>
+  <version>1.3</version>
   <description>STM32C031</description>
   <cpu>
     <name>CM0</name>
@@ -8728,7 +8728,7 @@ Other: reserved</description>
     </peripheral>
     <peripheral>
       <name>FLASH</name>
-      <description>Spider_FLASH register block</description>
+      <description>FLASH register block</description>
       <groupName>FLASH</groupName>
       <baseAddress>0x40022000</baseAddress>
       <addressBlock>
