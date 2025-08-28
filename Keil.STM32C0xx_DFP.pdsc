@@ -13,9 +13,13 @@
   </licenseSets>
 
   <releases>
-    <release version="2.2.2-dev">
+    <release version="2.2.1-dev">
       Active development ...
+      Updated debug configuration files
       Updated documentation references
+      Package Description (pdsc):
+      - Shortened device family description
+      - Added documentation for subfamilies STM32C051/91/92
     </release>
     <release version="1.0.0" date="2023-01-12">
       Initial version of STM32C0 Device Family Pack for use with:
@@ -40,9 +44,7 @@
       <book name="https://developer.arm.com/documentation/dui0662/latest" title="Cortex-M0+ Generic User Guide"/>
 
       <description>
-      The STM32C0xxxx mainstream microcontrollers are based on high-performance Arm® Cortex®-M0+ 32-bit RISC core operating at up to 48 MHz frequency.
-      Offering a high level of integration, they are suitable for a wide range of applications in consumer, industrial and appliance domains and ready for the Internet of Things (IoT) solutions.
-      The devices incorporate a memory protection unit (MPU), high-speed embedded memories, DMA, an extensive range of system functions, enhanced I/Os, and peripherals.
+High-performance STM32C0 MCUs with Arm Cortex-M0+ core, MPU, frequency up to 48 MHz.
       </description>
 
       <sequences>
@@ -104,11 +106,11 @@
         <book name="https://www.st.com/resource/en/reference_manual/rm0490-stm32c0x1-advanced-armbased-32bit-mcus-stmicroelectronics.pdf"  title="STM32C0x1 Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32c011d6.pdf" title="STM32C011x4/x6 Datasheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32C0x1.dbgconf" version="1.0.0">
+        <debugvars configfile="CMSIS/Debug/STM32C0x1.dbgconf" version="1.0.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000006;   // DBGMCU_CR:       DBGMCU configuration register
-          __var DbgMCU_APB_Fz1   = 0x00000000;   // DBGMCU_APB_FZ1:  DBGMCU APB freeze register 1
-          __var DbgMCU_APB_Fz2   = 0x00000000;   // DBGMCU_APB_FZ2:  DBGMCU APB freeze register 2
+          __var DbgMCU_APB_Fz1   = 0x00201803;   // DBGMCU_APB_FZ1:  DBGMCU APB freeze register 1
+          __var DbgMCU_APB_Fz2   = 0x00078800;   // DBGMCU_APB_FZ2:  DBGMCU APB freeze register 2
         </debugvars>
 
         <!-- ################################### 32 KB ################################## -->
@@ -196,11 +198,11 @@
         <book name="https://www.st.com/resource/en/reference_manual/rm0490-stm32c0x1-advanced-armbased-32bit-mcus-stmicroelectronics.pdf"  title="STM32C0x1 Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32c031c4.pdf" title="STM32C031x4/x6 Datasheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32C0x1.dbgconf" version="1.0.0">
+        <debugvars configfile="CMSIS/Debug/STM32C0x1.dbgconf" version="1.0.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000006;   // DBGMCU_CR:       DBGMCU configuration register
-          __var DbgMCU_APB_Fz1   = 0x00000000;   // DBGMCU_APB_FZ1:  DBGMCU APB freeze register 1
-          __var DbgMCU_APB_Fz2   = 0x00000000;   // DBGMCU_APB_FZ2:  DBGMCU APB freeze register 2
+          __var DbgMCU_APB_Fz1   = 0x00201803;   // DBGMCU_APB_FZ1:  DBGMCU APB freeze register 1
+          __var DbgMCU_APB_Fz2   = 0x00078800;   // DBGMCU_APB_FZ2:  DBGMCU APB freeze register 2
         </debugvars>
 
         <!-- ################################### 32 KB ################################## -->
@@ -308,13 +310,13 @@
         <compile define="STM32C051xx"/>
 
         <book name="https://www.st.com/resource/en/reference_manual/rm0490-stm32c0x1-advanced-armbased-32bit-mcus-stmicroelectronics.pdf"  title="STM32C0x1 Reference Manual"/>
-        <!-- <book name="..." title="STM32C051 Datasheet"/> -->
+        <book name="https://www.st.com/resource/en/datasheet/stm32c051c6.pdf" title="STM32C051 Datasheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32C0x1.dbgconf" version="1.0.0">
+        <debugvars configfile="CMSIS/Debug/STM32C0x1.dbgconf" version="1.0.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000006;   // DBGMCU_CR:       DBGMCU configuration register
-          __var DbgMCU_APB_Fz1   = 0x00000000;   // DBGMCU_APB_FZ1:  DBGMCU APB freeze register 1
-          __var DbgMCU_APB_Fz2   = 0x00000000;   // DBGMCU_APB_FZ2:  DBGMCU APB freeze register 2
+          __var DbgMCU_APB_Fz1   = 0x00201803;   // DBGMCU_APB_FZ1:  DBGMCU APB freeze register 1
+          __var DbgMCU_APB_Fz2   = 0x00078800;   // DBGMCU_APB_FZ2:  DBGMCU APB freeze register 2
         </debugvars>
 
         <!-- ################################### 64 KB ################################## -->
@@ -424,11 +426,11 @@
         <book name="https://www.st.com/resource/en/reference_manual/rm0490-stm32c0x1-advanced-armbased-32bit-mcus-stmicroelectronics.pdf"  title="STM32C0x1 Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32c071kb.pdf" title="STM32C071x8/xB Datasheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32C0x1.dbgconf" version="1.0.0">
+        <debugvars configfile="CMSIS/Debug/STM32C0x1.dbgconf" version="1.0.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000006;   // DBGMCU_CR:       DBGMCU configuration register
-          __var DbgMCU_APB_Fz1   = 0x00000000;   // DBGMCU_APB_FZ1:  DBGMCU APB freeze register 1
-          __var DbgMCU_APB_Fz2   = 0x00000000;   // DBGMCU_APB_FZ2:  DBGMCU APB freeze register 2
+          __var DbgMCU_APB_Fz1   = 0x00201803;   // DBGMCU_APB_FZ1:  DBGMCU APB freeze register 1
+          __var DbgMCU_APB_Fz2   = 0x00078800;   // DBGMCU_APB_FZ2:  DBGMCU APB freeze register 2
         </debugvars>
 
         <!-- ################################### 128 KB ################################# -->
@@ -679,13 +681,13 @@
         <compile define="STM32C091xx"/>
 
         <book name="https://www.st.com/resource/en/reference_manual/rm0490-stm32c0x1-advanced-armbased-32bit-mcus-stmicroelectronics.pdf"  title="STM32C0x1 Reference Manual"/>
-        <!-- <book name="..." title="STM32C091 Datasheet"/> -->
+        <book name="https://www.st.com/resource/en/datasheet/stm32c091cb.pdf" title="STM32C091 Datasheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32C0x1.dbgconf" version="1.0.0">
+        <debugvars configfile="CMSIS/Debug/STM32C0x1.dbgconf" version="1.0.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000006;   // DBGMCU_CR:       DBGMCU configuration register
-          __var DbgMCU_APB_Fz1   = 0x00000000;   // DBGMCU_APB_FZ1:  DBGMCU APB freeze register 1
-          __var DbgMCU_APB_Fz2   = 0x00000000;   // DBGMCU_APB_FZ2:  DBGMCU APB freeze register 2
+          __var DbgMCU_APB_Fz1   = 0x00201803;   // DBGMCU_APB_FZ1:  DBGMCU APB freeze register 1
+          __var DbgMCU_APB_Fz2   = 0x00078800;   // DBGMCU_APB_FZ2:  DBGMCU APB freeze register 2
         </debugvars>
 
         <!-- ################################### 256 KB ################################## -->
@@ -825,13 +827,13 @@
         <compile define="STM32C092xx"/>
 
         <book name="https://www.st.com/resource/en/reference_manual/rm0490-stm32c0x1-advanced-armbased-32bit-mcus-stmicroelectronics.pdf"  title="STM32C0x1 Reference Manual"/>
-        <!-- <book name="..." title="STM32C092 Datasheet"/> -->
+        <book name="https://www.st.com/resource/en/datasheet/stm32c091cb.pdf" title="STM32C092 Datasheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32C0x1.dbgconf" version="1.0.0">
+        <debugvars configfile="CMSIS/Debug/STM32C0x1.dbgconf" version="1.0.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000006;   // DBGMCU_CR:       DBGMCU configuration register
-          __var DbgMCU_APB_Fz1   = 0x00000000;   // DBGMCU_APB_FZ1:  DBGMCU APB freeze register 1
-          __var DbgMCU_APB_Fz2   = 0x00000000;   // DBGMCU_APB_FZ2:  DBGMCU APB freeze register 2
+          __var DbgMCU_APB_Fz1   = 0x00201803;   // DBGMCU_APB_FZ1:  DBGMCU APB freeze register 1
+          __var DbgMCU_APB_Fz2   = 0x00078800;   // DBGMCU_APB_FZ2:  DBGMCU APB freeze register 2
         </debugvars>
 
         <!-- ################################### 256 KB ################################## -->
