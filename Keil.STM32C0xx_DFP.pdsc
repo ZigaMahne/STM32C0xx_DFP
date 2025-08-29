@@ -17,6 +17,9 @@
       Active development ...
       Updated debug configuration files
       Updated documentation references
+      Updated Templates:
+      - Added DWARF-5 debug information
+      - Added generated output files
       Package Description (pdsc):
       - Shortened device family description
       - Added documentation for subfamilies STM32C051/91/92
