@@ -13,16 +13,8 @@
   </licenseSets>
 
   <releases>
-    <release version="2.2.1-dev">
+    <release version="2.3.1-dev">
       Active development ...
-      Updated debug configuration files
-      Updated documentation references
-      Updated Templates:
-      - Added DWARF-5 debug information
-      - Added generated output files
-      Package Description (pdsc):
-      - Shortened device family description
-      - Added documentation for subfamilies STM32C051/91/92
     </release>
     <release version="1.0.0" date="2023-01-12">
       Initial version of STM32C0 Device Family Pack for use with:
