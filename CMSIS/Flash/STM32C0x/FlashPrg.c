@@ -96,7 +96,7 @@ typedef struct
 #define FLASH_CR_PG                          ((unsigned int)0x00000001)
 #define FLASH_CR_PER                         ((unsigned int)0x00000002)
 #define FLASH_CR_MER1                        ((unsigned int)0x00000004)
-#define FLASH_CR_PNB                         ((unsigned int)0x000007F8)
+#define FLASH_CR_PNB                         ((unsigned int)0x000003F8)
 #define FLASH_CR_STRT                        ((unsigned int)0x00010000)
 #define FLASH_CR_LOCK                        ((unsigned int)0x80000000)
 // Flash OPTION Control Register definitions
