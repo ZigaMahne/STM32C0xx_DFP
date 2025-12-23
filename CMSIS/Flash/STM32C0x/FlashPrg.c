@@ -29,33 +29,35 @@
  *    Initial release
  */
 
-#include "..\FlashOS.h"        // FlashOS Structures
+#include "..\FlashOS.h"        // FlashOS: Keil/ARM flash algorithm interface structures
 #include <stdint.h>
 #include "cmsis_compiler.h"
 
-typedef volatile unsigned long    vu32;
-typedef          unsigned long     u32;
+// Basic type aliases used for MMIO register access
+typedef volatile unsigned long    vu32;   // volatile 32-bit for peripheral registers
+typedef          unsigned long     u32;   // plain 32-bit value
 
 #define M32(adr) (*((vu32 *) (adr)))
 
-#define FLASHSIZE_BASE   (0x1FFF75A0)
-// Peripheral Memory Map
-#define FLASH_BASE        0x40022000
-#define IWDG_BASE         0x40003000
-#define WWDG_BASE         0x40002C00
+// Device-specific system memory and peripheral base addresses
+#define FLASHSIZE_BASE   (0x1FFF75A0)     // System memory word holding flash size (in KB)
+// Peripheral Memory Map (STM32C0x)
+#define FLASH_BASE        0x40022000       // Flash interface registers
+#define IWDG_BASE         0x40003000       // Independent Watchdog registers
+#define WWDG_BASE         0x40002C00       // Window Watchdog registers
 
 #define FLASH           ((FLASH_TypeDef  *) FLASH_BASE)
 #define IWDG                ((IWDG_TypeDef *) IWDG_BASE)
 #define WWDG                ((WWDG_TypeDef *) WWDG_BASE)
-// Flash Registers
+// Flash Registers (reference: STM32C0 RM)
 typedef struct
 {
-  vu32  ACR;              /* FLASH access control register,            Address offset: 0x00 */
+  vu32  ACR;              /* Access control: latency, prefetch         Offset: 0x00 */
   vu32  PDKEYR;           /* FLASH power down key register,            Address offset: 0x04 */
   vu32  KEYR;             /* FLASH key register,                       Address offset: 0x08 */
   vu32  OPTKEYR;          /* FLASH option key register,                Address offset: 0x0C */
-  vu32  SR;               /* FLASH status register,                    Address offset: 0x10 */
-  vu32  CR;               /* FLASH control register,                   Address offset: 0x14 */
+  vu32  SR;               /* Status: errors, busy flags                Offset: 0x10 */
+  vu32  CR;               /* Control: erase/program/start/lock         Offset: 0x14 */
   vu32  ECCR;             /* FLASH ECC register,                       Address offset: 0x18 */
   vu32  RESERVED1;        /* Reserved1,                                Address offset: 0x1C */
   vu32  OPTR;             /* FLASH option register,                    Address offset: 0x20 */
@@ -86,22 +88,22 @@ typedef struct
    vu32 SR;   /* WWDG Status register,        Address offset: 0x08 */
 } WWDG_TypeDef;
 
-// Flash Keys
+// Flash Keys (required to unlock FLASH/Option bytes)
 #define FLASH_KEY1               0x45670123
 #define FLASH_KEY2               0xCDEF89AB
 #define FLASH_OPTKEY1            0x08192A3B
 #define FLASH_OPTKEY2            0x4C5D6E7F
 
-// Flash Control Register definitions
+// Flash Control Register definitions (bits in FLASH->CR)
 #define FLASH_CR_PG                          ((unsigned int)0x00000001)
 #define FLASH_CR_PER                         ((unsigned int)0x00000002)
 #define FLASH_CR_MER1                        ((unsigned int)0x00000004)
-#define FLASH_CR_PNB                         ((unsigned int)0x000003F8)
+#define FLASH_CR_PNB                         ((unsigned int)0x000007F8)
 #define FLASH_CR_STRT                        ((unsigned int)0x00010000)
 #define FLASH_CR_LOCK                        ((unsigned int)0x80000000)
 // Flash OPTION Control Register definitions
 #define FLASH_OPTCR_IWDG_SW                 ((unsigned int)0x00010000)
-// Flash Status Register definitions
+// Flash Status Register definitions (bits in FLASH->SR)
 #define FLASH_SR_EOP                         ((unsigned int)0x00000001)
 #define FLASH_SR_OPERR                       ((unsigned int)0x00000002)
 #define FLASH_SR_PROGERR                     ((unsigned int)0x00000008)
@@ -114,7 +116,9 @@ typedef struct
 #define FLASH_SR_RDERR                       ((unsigned int)0x00004000)
 #define FLASH_SR_OPTVERR                     ((unsigned int)0x00008000)
 #define FLASH_SR_BSY                         ((unsigned int)0x00010000)
+#define FLASH_SR_CFGBSY                      ((unsigned int)0x00040000)
 
+// Composite mask of all relevant error flags to clear/check
 #define FLASH_PGERR             (FLASH_SR_OPERR  | FLASH_SR_PROGERR | FLASH_SR_WRPERR | FLASH_SR_PGAERR  | FLASH_SR_SIZERR | \
                                  FLASH_SR_PGSERR | FLASH_SR_MISSERR  | FLASH_SR_FASTERR | FLASH_SR_RDERR | FLASH_SR_OPTVERR   )
 
@@ -130,30 +134,33 @@ typedef struct
 
 int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
 
-	__disable_irq();
-  /*Clear the error status*/
-  FLASH->SR =FLASH_PGERR;
-	 // Test if IWDG is running (IWDG in HW mode)
+	__disable_irq();                          // Prevent interrupts during flash operations
+
+  /* Clear any stale error flags before starting */
+  FLASH->SR = FLASH_PGERR;
+
+	/* If IWDG is in hardware mode, extend its timeout to avoid resets */
   if ((FLASH->OPTR & FLASH_OPTCR_IWDG_SW) == 0x00)
   {
-    // Set IWDG time out to ~32.768 second
-    IWDG->KR  = 0xAAAA;
-    IWDG->KR  = 0x5555;                         // Enable write access to IWDG_PR and IWDG_RLR
-    IWDG->PR  = 0x06;                           // Set prescaler to 256
-    IWDG->RLR = 4095;                           // Set reload value to 4095
+    /* Configure IWDG for ~32.768s timeout */
+    IWDG->KR  = 0xAAAA;                     // Reload
+    IWDG->KR  = 0x5555;                     // Enable write access to PR/RLR
+    IWDG->PR  = 0x06;                       // Prescaler to 256
+    IWDG->RLR = 4095;                       // Max reload value
+    /* Configure WWDG conservatively as well */
     WWDG->CFR = 0x1FF;
     WWDG->CR = 0x7F;
   }
- if((FLASH->CR & FLASH_CR_LOCK) != 0)
+
+  /* Unlock FLASH registers if locked */
+  if((FLASH->CR & FLASH_CR_LOCK) != 0)
   {
-    /* Authorize the FLASH Registers access */
     FLASH->KEYR = FLASH_KEY1;
     FLASH->KEYR = FLASH_KEY2;
   }
 
-  return (0);                                           // Done
+  return (0);                               // Initialization OK
 }
-
 
 /*
  *  De-Initialize Flash Programming Functions
@@ -163,11 +170,11 @@ int Init (unsigned long adr, unsigned long clk, unsigned long fnc) {
 
 int UnInit (unsigned long fnc) {
 
-  FLASH->CR |= FLASH_CR_LOCK;                              // Lock Flash
+  /* Re-lock the FLASH control register when finished */
+  FLASH->CR |= FLASH_CR_LOCK;
 
-  return (0);                                           // Done
+  return (0);
 }
-
 
 /*
  *  Blank Check Checks if Memory is Blank
@@ -179,11 +186,10 @@ int UnInit (unsigned long fnc) {
 
 int BlankCheck (unsigned long adr, unsigned long sz, unsigned char pat) {
 
-  /* force erase even if the content is 'Initial Content of Erased Memory'.
-     Only a erased sector can be programmed. I think this is because of ECC */
+  /* Always signal 'not blank' to force erase before program.
+     Due to ECC and programming rules, sectors must be erased first. */
   return (1);
 }
-
 
 /*
  *  Erase complete Flash Memory
@@ -191,31 +197,35 @@ int BlankCheck (unsigned long adr, unsigned long sz, unsigned char pat) {
  */
 
 int EraseChip (void) {
-__disable_irq();
-  while (FLASH->SR & FLASH_SR_BSY) {
-  }
 
+	__disable_irq();
 
+  /* Wait for any ongoing flash operation to complete */
+  while (FLASH->SR & FLASH_SR_BSY) {}
 
+  /* Clear prior error flags */
+  FLASH->SR = FLASH_PGERR;
+
+  /* Ensure configuration busy flag is clear before starting */
+	while (FLASH->SR & FLASH_SR_CFGBSY) {}
+
+  /* Enable mass erase of bank 1 and trigger */
   FLASH->CR |=  FLASH_CR_MER1 ;
-  FLASH->CR |=  FLASH_CR_STRT;                               // Start Erase
+  FLASH->CR |=  FLASH_CR_STRT;                              
 
-  while (FLASH->SR & FLASH_SR_BSY) {
+  /* Wait until CFGBSY clears (operation finished) */
+  while (FLASH->SR & FLASH_SR_CFGBSY) {}
+
+  /* Check for errors */
+  if (FLASH->SR & FLASH_PGERR) {
+    FLASH->SR  = FLASH_PGERR;                               // Reset Error Flags
+    return (1);
   }
 
+	FLASH->CR &= ~(FLASH_CR_MER1);                            // Cleanup
 
-
-  if (FLASH->SR & FLASH_PGERR) {                          // Check for Error
-    FLASH->SR  = FLASH_PGERR;                             // Reset Error Flags
-    return (1);                                           // Failed
-  }
-
-		  FLASH->CR &= (~FLASH_CR_MER1);
-
-
-  return (0);                                           // Done
+  return (0);
 }
-
 
 /*
  *  Erase Sector in Flash Memory
@@ -225,52 +235,59 @@ __disable_irq();
 
 
 int EraseSector (unsigned long adr) {
-  unsigned long page;
-
-__disable_irq();
+  
+	unsigned long page;
 	uint32_t gFlashSize;
 
- gFlashSize = (M32(FLASHSIZE_BASE) & 0x00000FFF);
-uint32_t	FLASH_PNB=(((((gFlashSize*0x400)/0x800)-1))<<3);
+	__disable_irq();
+	
+  /* Get the flash size (KB) from system memory */
+	gFlashSize = (M32(FLASHSIZE_BASE) & 0x00000FFF);
+	
+  /* Compute page mask based on size: page size is 2KB (0x800) */
+  uint32_t FLASH_PNB=(((gFlashSize*0x400)/0x800)-1);
+	
+  /*Check BSY1 bit status*/	
+	while (FLASH->SR & FLASH_SR_BSY) {}
+	
   /*Clear the error status*/
-    FLASH->SR =FLASH_PGERR;
+  FLASH->SR = FLASH_PGERR;
+	
+	/*Check CFGBSY bit is cleared*/	
+	while (FLASH->SR & FLASH_SR_CFGBSY) {}
 
-  /*Clear page and block bits*/
-  FLASH->CR &= ~(FLASH_PNB);
+  /* Calculate page index from absolute address (flash base 0x08000000) */
+  page = (((adr-0x8000000) >>11)& FLASH_PNB) ;
 
-
-  /*Calculate the page and set
-    the block bit if needed*/
-
-    page = ((adr-0x8000000) >>8) ;
-
-  /*Set the page and the Page erase bit*/
-  FLASH->CR |= (FLASH_CR_PER | page);
-  /*Start the erase operation*/
+	/*Clear page and block bits*/
+  FLASH->CR &= ~((FLASH_PNB)<<3);
+		
+  /* Select target page and enable Page Erase */
+  FLASH->CR |= (FLASH_CR_PER | (page<<3));
+		
+  /* Start the erase operation */
   FLASH->CR |= FLASH_CR_STRT;
 
-  /*wait until the operation ends*/
-  while (FLASH->SR & FLASH_SR_BSY);
+  /* Wait until the operation ends */
+  while (FLASH->SR & FLASH_SR_CFGBSY);
 
-	if (FLASH->SR & FLASH_PGERR) {                          // Check for Error
-    FLASH->SR  = FLASH_PGERR;                             // Reset Error Flags
-    return (1);                                           // Failed
+	if (FLASH->SR & FLASH_PGERR) {                          		// Check for Error
+    FLASH->SR  = FLASH_PGERR;                             		// Reset Error Flags
+    return (1);                                          			// Failed
   }
-	/*Clear page and block bits*/
-  FLASH->CR &= ~(FLASH_PNB);
 	
-	 FLASH->CR &= (~FLASH_CR_PER);
-	  if ((* (unsigned long *)0x08000000) == 0xFFFFFFFF)          //empty check
+  /* Clear page selection and PER bit */
+  FLASH->CR &= ~((FLASH_PNB)<<3);	
+	FLASH->CR &= ~(FLASH_CR_PER);
+	
+	/* If flash appears empty at start, enable prefetch/latency bit */
+	if ((* (unsigned long *)0x08000000) == 0xFFFFFFFF)
   {
     FLASH->ACR |= 0x10000;
   }
 
-  return (0);                                           // Done
+  return (0);                                           
 }
-
-
-
-
 
 /*
  *  Program Page in Flash Memory
@@ -283,64 +300,75 @@ uint32_t	FLASH_PNB=(((((gFlashSize*0x400)/0x800)-1))<<3);
 int ProgramPage (unsigned long adr, unsigned long sz, unsigned char *buf) {
 
 	__disable_irq();
+	
   sz = (sz + 7) & ~7;
-unsigned long tab[8];
+	unsigned long tab[8];
 	int i;
 
-    while (FLASH->SR & FLASH_SR_BSY) {};
-    FLASH->SR = 0x000001FF;                               // Reset Error Flags
-		FLASH->CR |= FLASH_CR_PG ;	                              // Programming Enabled
+	/*Check BSY1 bit status*/	
+    /* Align to 8 bytes: device programs double-words */
+	while (FLASH->SR & FLASH_SR_BSY) {}
+	
+  /*Clear the error status*/
+  FLASH->SR = FLASH_PGERR;
+	
+	/*Check CFGBSY bit is cleared*/	
+	while (FLASH->SR & FLASH_SR_CFGBSY) {} 
+		
+	FLASH->CR |= FLASH_CR_PG ;	                                // Programming Enabled
 
-  while (sz) {
+  while (sz) 
+	{
+		if(sz>=8)
+		{
+			M32(adr) = *((u32 *)(buf+0 ));                   				// Program the first word of the Double Word
+    /* Program one double-word (two 32-bit writes) */
+			M32(adr+4) = *((u32 *)(buf+4 ));												// Program the second word of the Double Word
+			
+			adr += 8;                                           		// Go to next DoubleWord
+			buf += 8;
+			sz  -= 8;
+			
+   			// Advance to next double-word
+			while (FLASH->SR & FLASH_SR_CFGBSY);
+		}
+		else
+		{
+			for(i=0;i<sz;i++)
+      {
+				tab[i]= *((unsigned char *)buf);
+        buf=buf+1;
+      }
 
-		if(sz>=8){
-      M32(adr) = *((u32 *)(buf+0 ));                   // Program the first word of the Double Word
-			M32(adr+4) = *((u32 *)(buf+4 ));
-			adr += 8;                                           // Go to next DoubleWord
-    buf += 8;
-    sz  -= 8;
-      while (FLASH->SR & FLASH_SR_BSY);
+      for(i=0;i<8-sz;i++)
+      {
+        tab[i+sz]=0xFF;
+      }
 
-	 }
-else{
-	     for(i=0;i<sz;i++)
-        {
-          tab[i]= *((unsigned char *)buf);
-          buf=buf+1;
-        }
-
-        for(i=0;i<8-sz;i++)
-        {
-          tab[i+sz]=0xFF;
-        }
-
-
-
-       /*wait until the operation ends*/
-       while (FLASH->SR & FLASH_SR_BSY){};
-
-
-          M32(adr) = *((u32 *)(&tab+0 ));
-		    M32(adr+4) = *((u32 *)(&tab+4 ));
-         sz =0;
-
-}
-    if ((FLASH->SR & FLASH_SR_EOP)) {                        // Check for Error
+      /*wait until the operation ends*/
+      while (FLASH->SR & FLASH_SR_CFGBSY){};
+				
+			M32(adr) = *((u32 *)(&tab+0 ));
+		  M32(adr+4) = *((u32 *)(&tab+4 ));
+      sz =0;
+		}
+		
+    if ((FLASH->SR & FLASH_SR_EOP)) 
+		{                        															// Check for Error
       FLASH->SR  = FLASH_PGERR;                           // Reset Error Flags
       return (1);                                         // Failed
+      /* Check for Error */
     }
-
-
   }
-		FLASH->CR &= (~FLASH_CR_PG) ;
-if ((* (unsigned long *)0x08000000) != 0xFFFFFFFF)  //empty check
+	
+	FLASH->CR &= ~(FLASH_CR_PG) ;
+	
+	if ((* (unsigned long *)0x08000000) != 0xFFFFFFFF)  		//empty check
   {
     FLASH->ACR &= 0xFFFEFFFF;
   }
+    /* If flash not empty at start, adjust ACR prefetch/latency bit */
 
-
-
-
-  return (0);                                           // Done
+  return (0);                                           	// Done
 
 }
